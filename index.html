@@ -4,11 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bem-vindo(a)</title>
-<link rel="icon" href="image/heart.png" type="image/x-icon" />
-
+  <link rel="icon" href="image/heart.png" type="image/x-icon" />
   <link rel="stylesheet" href="styles.css" />
+
   <style>
-    /* Estilo específico da página home */
     body {
       background-color: #fff0f5;
       font-family: Arial, sans-serif;
@@ -80,5 +79,33 @@
       }
     });
   </script>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+
+  <!-- Inicialização do Firebase -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDY4GfPbpE0b8fz6ZfUOsitiuu2pUcVqRU",
+      authDomain: "amors-18a20.firebaseapp.com",
+      projectId: "amors-18a20",
+      storageBucket: "amors-18a20.appspot.com",
+      messagingSenderId: "360392240276",
+      appId: "1:360392240276:web:bdad911a67a074904b9881",
+      measurementId: "G-13GQYQJYDR"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    const database = firebase.database();
+    const storage = firebase.storage();
+  </script>
+
+  <!-- Agora sim, carregue o app.js DEPOIS da inicialização -->
+  <script src="app.js"></script>
 </body>
 </html>
