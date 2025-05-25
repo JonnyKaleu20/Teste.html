@@ -1,150 +1,160 @@
-/* === Estilo Geral === */
+/* --- Estilo Geral --- */
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #fff0f5, #ffe6f0);
+  color: #444;
+  margin: 0;
   padding: 20px;
-  background: #fff0f5;
-  color: #333;
 }
 
 main {
   max-width: 750px;
-  margin: 0 auto;
-  background: white;
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 0 15px rgba(255, 92, 141, 0.3);
-}
-
-/* Títulos */
-h1, h2 {
-  color: #ff598f;
+  margin: 30px auto;
+  background: #fff5f8;
+  padding: 30px 40px;
+  border-radius: 30px;
+  /* Tira essa sombra pra remover a linha */
+  box-shadow: none; 
   text-align: center;
-  font-weight: bold;
 }
 
-/* === Navegação === */
+h1 {
+  font-size: 2.8rem;
+  color: #d81e5b;
+  margin-bottom: 30px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 4px #ffa3c2;
+}
+
 nav {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin-bottom: 20px;
+  gap: 25px;
+  margin-bottom: 40px;
+  border-bottom: none;
+  box-shadow: none;
 }
 
-nav button,
-nav a.btnAdmin {
-  background-color: #ff598f;
+nav a, nav button {
+  background-color: #ff4d88;
   color: white;
   border: none;
-  padding: 10px 18px;
-  border-radius: 12px;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 14px;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 6px 15px rgba(255, 89, 143, 0.6);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-decoration: none;
 }
 
-nav button:hover,
-nav a.btnAdmin:hover {
-  background-color: #e14572;
+nav a:hover, nav button:hover {
+  background-color: #cc0052;
+  transform: scale(1.07);
 }
 
-/* === Seções === */
+/* --- Seções --- */
+
 .secao {
   display: none;
-  margin-top: 20px;
+  animation: fadeIn 0.6s ease forwards;
+  text-align: left;
 }
 
 .secao.active {
   display: block;
 }
 
-/* === Galeria de Fotos === */
+/* --- Fotos --- */
+
+#fotos {
+  background: #ffe6f0;
+  padding: 0;
+  border-radius: 25px;
+  /* remove sombra para evitar linhas */
+  box-shadow: none;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#fotos h2 {
+  display: none;
+}
+
 .galeria {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
+  margin-top: 0;
+  padding: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+  min-height: 100px;
+  border-radius: 25px;
+  background: #fff0f5;
+  box-shadow: inset 0 0 15px rgba(255, 89, 143, 0.1);
 }
 
 .galeria img {
-  max-width: 200px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(255, 92, 141, 0.3);
-}
-
-/* === Formulários === */
-form label {
-  font-weight: bold;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="file"],
-textarea {
   width: 100%;
-  padding: 10px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(255, 89, 143, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.galeria img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 14px 40px rgba(255, 89, 143, 0.7);
+}
+
+/* --- Animação fadeIn --- */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* --- Outros Inputs e Botões Gerais --- */
+input[type="text"],
+textarea,
+input[type="file"] {
+  width: 100%;
+  padding: 14px;
   margin-top: 6px;
-  margin-bottom: 14px;
-  border-radius: 10px;
-  border: 1.5px solid #ffb6c1;
-  font-size: 14px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  border: 2px solid #ffb6c1;
+  font-size: 15px;
   box-sizing: border-box;
+  transition: border-color 0.3s ease;
 }
 
-textarea {
-  resize: vertical;
+input[type="text"]:focus,
+textarea:focus,
+input[type="file"]:focus {
+  outline: none;
+  border-color: #ff598f;
+  box-shadow: 0 0 8px #ff598f99;
 }
 
-/* Botões */
-button[type="submit"],
-button,
-input[type="submit"] {
+button[type="submit"] {
+  width: 100%;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 30px;
+  border: none;
   background-color: #ff598f;
   color: white;
-  border: none;
-  padding: 10px 18px;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 8px 20px rgba(255, 92, 141, 0.5);
+  transition: background-color 0.3s ease, transform 0.25s ease;
 }
 
-button:hover,
-input[type="submit"]:hover {
+button[type="submit"]:hover {
   background-color: #e14572;
+  transform: scale(1.05);
 }
-
-/* === Mensagens e Alerta Admin === */
-.admin-msg {
-  font-weight: bold;
-  margin-top: 12px;
-}
-
-.admin-msg.erro {
-  color: #e63946;
-}
-
-.admin-msg.sucesso {
-  color: #2e7d32;
-}
-
-/* === Lista de Cartinhas === */
-.listaCartinhas .cartinha {
-  background: #fff0f8;
-  border: 1px solid #ffb6c1;
-  padding: 12px 15px;
-  border-radius: 14px;
-  margin-bottom: 15px;
-  box-shadow: 0 3px 8px rgba(255, 92, 141, 0.2);
-}
-
-.listaCartinhas .cartinha img {
-  margin-top: 8px;
-  max-width: 180px;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(255, 92
-::contentReference[oaicite:0]{index=0}
- 

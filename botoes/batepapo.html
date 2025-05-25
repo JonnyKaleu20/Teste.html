@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>💬 Bate-Papo em Tempo Real</title>
+   <link rel="icon" href="image/heart.png" type="image/x-icon" />
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -29,7 +30,7 @@
     }
 
     #messages {
-      max-height: 300px;
+      max-height: 400px;
       overflow-y: auto;
       margin-bottom: 10px;
       list-style: none;
@@ -51,19 +52,38 @@
     }
 
     input, textarea {
-      padding: 10px;
-      border-radius: 5px;
+      padding: 12px 15px;
+      border-radius: 8px;
       border: 1px solid #ff4d88;
       width: 100%;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #cc0052;
+      box-shadow: 0 0 8px rgba(204, 0, 82, 0.5);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #ff80aa;
+      font-style: italic;
     }
 
     button {
-      padding: 10px;
+      padding: 12px 20px;
       background-color: #ff4d88;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     button:hover {
@@ -83,14 +103,14 @@
     <ul id="messages"></ul>
 
     <form id="chatForm">
-      <input type="text" id="nome" placeholder="Seu nome (opcional)" />
+      <input type="text" id="nome" placeholder="Seu nome" required />
       <textarea id="mensagem" placeholder="Digite sua mensagem..." required></textarea>
       <button type="submit">Enviar Mensagem 💌</button>
     </form>
   </div>
 
   <div id="backBtn">
-   <button onclick="window.location.href='../conteudo.html'">🔙 Voltar</button>
+   <button onclick="window.location.href='../conteudo.html'"> Voltar</button>
   </div>
 
   <!-- Firebase SDKs -->
@@ -118,9 +138,15 @@
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const nome = inputNome.value.trim() || "Anônimo";
+      const nome = inputNome.value.trim();
       const mensagem = inputMsg.value.trim();
       const horario = new Date().toLocaleString();
+
+      if (nome === "") {
+        alert("Por favor, preencha seu nome.");
+        inputNome.focus();
+        return;
+      }
 
       if (mensagem !== "") {
         db.push({ nome, mensagem, horario });
@@ -136,7 +162,6 @@
       mensagens.scrollTop = mensagens.scrollHeight;
     });
   </script>
-  
 
 </body>
 </html>

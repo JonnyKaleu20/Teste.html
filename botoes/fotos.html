@@ -1,46 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Fotos Enviadas</title>
+  <meta charset="UTF-8" />
+  <title>Galeria de Fotos</title>
+   <link rel="icon" href="image/heart.png" type="image/x-icon" />
+  <link rel="stylesheet" href="fotos.css" />
+  <script src="app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
-  <link rel="stylesheet" href="../styles.css">
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
 </head>
 <body>
   <main>
     <h1>Galeria de Fotos</h1>
+
+    <input type="password" id="senhaInput" placeholder="Digite a senha para enviar" />
+    <input type="file" id="fotoInput" accept="image/*" />
+    <button id="enviarFotoBtn">Enviar Foto</button>
+
     <div id="galeria" class="galeria"></div>
-    <a href="admin.html">Voltar</a>
   </main>
 
-  <script>
-    // Config Firebase
-    const firebaseConfig = {
-      apiKey: "SUA_API_KEY",
-      authDomain: "SEU_DOMINIO",
-      databaseURL: "https://SEU_PROJETO.firebaseio.com",
-      projectId: "SEU_PROJETO",
-      storageBucket: "SEU_BUCKET.appspot.com",
-      messagingSenderId: "SEU_ID",
-      appId: "SEU_APP_ID"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-
-    const galeria = document.getElementById('galeria');
-
-    db.ref('fotos').once('value', snapshot => {
-      snapshot.forEach(child => {
-        const foto = child.val();
-        const img = document.createElement('img');
-        img.src = foto.url;
-        img.alt = 'Foto enviada';
-        img.style.maxWidth = '200px';
-        img.style.margin = '10px';
-        galeria.appendChild(img);
-      });
-    });
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
