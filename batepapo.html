@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>💬 Bate-Papo em Tempo Real</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff0f5;
+      padding: 20px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #cc0052;
+    }
+
+    #chatBox {
+      width: 100%;
+      max-width: 600px;
+      background-color: white;
+      border: 2px solid #ff4d88;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    #messages {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      list-style: none;
+      padding: 0;
+    }
+
+    #messages li {
+      background-color: #ffe6e6;
+      border: 1px solid #ffcce0;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+
+    #chatForm {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+    }
+
+    input, textarea {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ff4d88;
+      width: 100%;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #ff4d88;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #cc0052;
+    }
+
+    #backBtn {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💬 Bate-Papo do Amor</h1>
+
+  <div id="chatBox">
+    <ul id="messages"></ul>
+
+    <form id="chatForm">
+      <input type="text" id="nome" placeholder="Seu nome (opcional)" />
+      <textarea id="mensagem" placeholder="Digite sua mensagem..." required></textarea>
+      <button type="submit">Enviar Mensagem 💌</button>
+    </form>
+  </div>
+
+  <div id="backBtn">
+   <button onclick="window.location.href='../conteudo.html'">🔙 Voltar</button>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDY4GfPbpE0b8fz6ZfUOsitiuu2pUcVqRU",
+      authDomain: "amors-18a20.firebaseapp.com",
+      databaseURL: "https://amors-18a20-default-rtdb.firebaseio.com",
+      projectId: "amors-18a20",
+      storageBucket: "amors-18a20.appspot.com",
+      messagingSenderId: "360392240276",
+      appId: "1:360392240276:web:7910c99a560efc0c4b9881"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database().ref("batepapo");
+
+    const form = document.getElementById("chatForm");
+    const mensagens = document.getElementById("messages");
+    const inputNome = document.getElementById("nome");
+    const inputMsg = document.getElementById("mensagem");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const nome = inputNome.value.trim() || "Anônimo";
+      const mensagem = inputMsg.value.trim();
+      const horario = new Date().toLocaleString();
+
+      if (mensagem !== "") {
+        db.push({ nome, mensagem, horario });
+        inputMsg.value = "";
+      }
+    });
+
+    db.on("child_added", (snapshot) => {
+      const msg = snapshot.val();
+      const li = document.createElement("li");
+      li.innerHTML = `<strong>${msg.nome}</strong> <small>(${msg.horario})</small><br>${msg.mensagem}`;
+      mensagens.appendChild(li);
+      mensagens.scrollTop = mensagens.scrollHeight;
+    });
+  </script>
+  
+
+</body>
+</html>
