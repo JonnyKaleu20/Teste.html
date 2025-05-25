@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bem-vindo(a)</title>
+<link rel="icon" href="image/heart.png" type="image/x-icon" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Estilo específico da página home */
+    body {
+      background-color: #fff0f5;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      color: #333;
+    }
+
+    h1 {
+      color: #ff598f;
+      margin-bottom: 10px;
+    }
+
+    input#senha {
+      padding: 10px;
+      border: 1.5px solid #ffb6c1;
+      border-radius: 10px;
+      width: 125px;
+      font-size: 16px;
+      box-shadow: 0 2px 5px rgba(255, 92, 141, 0.2);
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #ff598f;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e14572;
+    }
+
+    #mensagemErro {
+      margin-top: 12px;
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>💖 Bem-vindo(a) 💖</h1>
+    <p>Digite a senha para acessar:</p>
+
+    <form id="formHome">
+      <input type="password" id="senha" placeholder="Digite a senha" required />
+      <br />
+      <button type="submit">Entrar</button>
+    </form>
+
+    <p id="mensagemErro"></p>
+  </main>
+
+  <script>
+    document.getElementById('formHome').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const senha = document.getElementById('senha').value.trim();
+      if (senha === 'Amor') {
+        window.location.href = 'conteudo.html';
+      } else {
+        document.getElementById('mensagemErro').textContent = 'Senha incorreta.';
+      }
+    });
+  </script>
+</body>
+</html>

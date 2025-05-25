@@ -1,0 +1,181 @@
+/* Geral */
+body {
+  font-family: Arial, sans-serif;
+  padding: 10px;
+  background: #fff0f5;
+  color: #333;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px 25px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(255, 92, 141, 0.4);
+}
+
+h1, h2 {
+  color: #ff598f;
+  text-align: center;
+  font-weight: 600;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 15px;
+}
+
+nav button,
+nav a.btnAdmin {
+  background-color: #ff598f;
+  border: none;
+  padding: 10px 16px;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+nav button:hover,
+nav a.btnAdmin:hover {
+  background-color: #e14572;
+}
+
+/* Seções */
+.secao {
+  margin-top: 20px;
+}
+
+/* Galeria de fotos */
+.galeria {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.fotoWrapper {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+}
+
+.fotoWrapper img {
+  max-width: 220px;
+  border-radius: 15px;
+  box-shadow: 0 6px 14px rgba(255, 92, 141, 0.4);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  display: block;
+}
+
+.fotoWrapper img:hover {
+  transform: scale(1.05);
+}
+
+.btnExcluirFoto {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: #e63946;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 22px;
+  padding: 0;
+  font-size: 18px;
+}
+
+/* Formulários */
+form label {
+  font-weight: 600;
+}
+
+input[type="text"],
+input[type="password"],
+textarea,
+input[type="file"] {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 14px;
+  border-radius: 8px;
+  border: 1.5px solid #ffb6c1;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+button[type="submit"] {
+  background-color: #ff598f;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #e14572;
+}
+
+/* Mensagens de admin */
+.admin-msg {
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+.admin-msg.erro {
+  color: #e63946;
+}
+
+.admin-msg.sucesso {
+  color: #4caf50;
+}
+
+/* Lista de cartinhas */
+.listaCartinhas .cartinha {
+  border: 1.2px solid #ffadc7;
+  background: #fff0f5;
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 3px 8px rgba(255, 92, 141, 0.25);
+}
+
+.listaCartinhas .cartinha img {
+  max-width: 200px;
+  margin-top: 8px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(255, 92, 141, 0.4);
+}
+
+/* Bate-papo */
+.listaMensagens .mensagem-batepapo {
+  border: 1.3px solid #ffadc7;
+  background: #fff0f5;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 13px rgba(255, 92, 141, 0.25);
+}
+.listaMensagens .mensagem-batepapo strong {
+  color: #e91e63;
+}
+
+.listaMensagens .mensagem-batepapo em {
+  font-size: 0.9em;
+  color: #555;
+  margin-left: 8px;
+}

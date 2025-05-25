@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Área Admin - Enviar Fotos</title>
+  <link rel="icon" href="image/heart.png" type="image/x-icon" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <h1>Área Admin - Enviar Fotos</h1>
+
+    <form id="formAdmin">
+      <label for="senhaAdmin">Senha do Admin:</label><br />
+      <input type="password" id="senhaAdmin" required /><br /><br />
+
+      <label for="fotoUpload">Selecione uma foto:</label><br />
+      <input type="file" id="fotoUpload" accept="image/*" required /><br /><br />
+
+      <button type="submit">Enviar Foto</button>
+    </form>
+
+    <p id="mensagemAdmin" class="admin-msg"></p>
+
+    <br />
+    <a href="conteudo.html">Voltar para Conteúdos</a>
+  </main>
+
+  <script>
+    const formAdmin = document.getElementById('formAdmin');
+    const senhaAdminInput = document.getElementById('senhaAdmin');
+    const fotoUploadInput = document.getElementById('fotoUpload');
+    const mensagemAdmin = document.getElementById('mensagemAdmin');
+
+    formAdmin.addEventListener('submit', e => {
+      e.preventDefault();
+      const senhaAdmin = senhaAdminInput.value.trim();
+      if (senhaAdmin !== 'Kaleu') {
+        mensagemAdmin.textContent = 'Senha do admin incorreta!';
+        mensagemAdmin.className = 'admin-msg erro';
+        return;
+      }
+      const file = fotoUploadInput.files[0];
+      if (!file) {
+        mensagemAdmin.textContent = 'Por favor, selecione um arquivo.';
+        mensagemAdmin.className = 'admin-msg erro';
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        // Pega array do localStorage ou cria vazio
+        const fotos = JSON.parse(localStorage.getItem('galeriaFotos') || '[]');
+        fotos.push({ nome: file.name, dataURL: reader.result });
+        localStorage.setItem('galeriaFotos', JSON.stringify(fotos));
+
+        mensagemAdmin.textContent = `Foto "${file.name}" enviada e salva com sucesso!`;
+        mensagemAdmin.className = 'admin-msg sucesso';
+
+        // Limpa inputs
+        senhaAdminInput.value = '';
+        fotoUploadInput.value = '';
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>
