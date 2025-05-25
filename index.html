@@ -52,6 +52,32 @@
       color: red;
       font-weight: bold;
     }
+
+    /* Estilos para o chat */
+    #chat-box {
+      max-width: 400px;
+      height: 300px;
+      margin: 20px auto;
+      padding: 10px;
+      border: 1px solid #ffb6c1;
+      border-radius: 8px;
+      background: #fff0f5;
+      overflow-y: auto;
+      text-align: left;
+      font-size: 14px;
+      color: #333;
+    }
+
+    #chat-input {
+      width: 300px;
+      padding: 10px;
+      border: 1.5px solid #ffb6c1;
+      border-radius: 10px;
+      font-size: 16px;
+      margin-right: 10px;
+      box-shadow: 0 2px 5px rgba(255, 92, 141, 0.2);
+    }
+
   </style>
 </head>
 <body>
@@ -66,9 +92,15 @@
     </form>
 
     <p id="mensagemErro"></p>
+
+    <!-- Chat básico -->
+    <div id="chat-box"></div>
+    <input id="chat-input" type="text" placeholder="Digite sua mensagem" />
+    <button onclick="sendMessage()">Enviar</button>
   </main>
 
   <script>
+    // Validação da senha
     document.getElementById('formHome').addEventListener('submit', function (e) {
       e.preventDefault();
       const senha = document.getElementById('senha').value.trim();
@@ -91,6 +123,7 @@
     const firebaseConfig = {
       apiKey: "AIzaSyDY4GfPbpE0b8fz6ZfUOsitiuu2pUcVqRU",
       authDomain: "amors-18a20.firebaseapp.com",
+      databaseURL: "https://amors-18a20-default-rtdb.firebaseio.com", // ESSENCIAL para o chat funcionar
       projectId: "amors-18a20",
       storageBucket: "amors-18a20.appspot.com",
       messagingSenderId: "360392240276",
@@ -105,7 +138,7 @@
     const storage = firebase.storage();
   </script>
 
-  <!-- Agora sim, carregue o app.js DEPOIS da inicialização -->
+  <!-- Seu código JS com as funções do chat -->
   <script src="app.js"></script>
 </body>
 </html>

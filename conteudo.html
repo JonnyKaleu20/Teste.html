@@ -3,239 +3,114 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Conteúdos - Amor</title>
-  <link rel="icon" href="image/heart.png" type="image/x-icon" />
-  <link rel="stylesheet" href="styles.css" />
+  <title>Chat e Cartinhas</title>
+  <style>
+    body {
+      background-color: #fff0f5;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      color: #ff598f;
+      text-align: center;
+    }
+    #chat-box, #cartinhas-box, #photos-box {
+      border: 1px solid #ccc;
+      background: white;
+      padding: 10px;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    #chat-input {
+      width: 80%;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #ffb6c1;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 8px 15px;
+      background-color: #ff598f;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e14572;
+    }
+    input, textarea {
+      width: 100%;
+      margin-bottom: 8px;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ffb6c1;
+      font-size: 14px;
+      resize: vertical;
+    }
+    img {
+      max-width: 200px;
+      margin-top: 5px;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
-  <main>
-    <h1>Bem-vindo Amor 💌</h1>
 
-    <nav>
-      <button id="btnFotos">Fotos</button>
-      <button id="btnCartinhas">Cartinhas</button>
-      <button id="btnBatePapo">Bate-papo</button>
-      <a href="admin.html" class="btnAdmin">Área Admin</a>
-    </nav>
+  <h1>Chat em Tempo Real</h1>
 
-    <!-- Seções -->
-    <section id="fotos" class="secao">
-      <h2>Nossas Fotos</h2>
-      <div class="galeria" id="galeriaFotos"></div>
-    </section>
+  <div id="chat-box"></div>
+  <input type="text" id="chat-input" placeholder="Digite sua mensagem..." />
+  <button onclick="sendMessage()">Enviar</button>
 
-    <section id="cartinhas" class="secao" style="display:none;">
-      <h2>Cartinhas</h2>
+  <hr />
 
-      <form id="formCartinha">
-        <label for="nomeCartinha">Nome:</label><br />
-        <input type="text" id="nomeCartinha" required /><br />
+  <h2>Cartinhas</h2>
+  <div id="cartinhas-box"></div>
+  <input type="text" id="cartinha-nome" placeholder="Seu nome" />
+  <textarea id="cartinha-msg" placeholder="Mensagem"></textarea>
+  <input type="file" id="cartinha-file" accept="image/*" />
+  <button onclick="sendCartinha()">Enviar Cartinha</button>
 
-        <label for="textoCartinha">Mensagem:</label><br />
-        <textarea id="textoCartinha" rows="4" required></textarea><br />
+  <hr />
 
-        <label for="arquivoCartinha">Enviar foto ou arquivo (opcional):</label><br />
-        <input type="file" id="arquivoCartinha" /><br /><br />
+  <h2>Fotos</h2>
+  <div id="photos-box"></div>
+  <input type="file" id="photo-input" accept="image/*" />
+  <button onclick="sendPhoto()">Enviar Foto</button>
 
-        <button type="submit">Enviar Cartinha</button>
-      </form>
-
-      <div id="listaCartinhas" class="listaCartinhas"></div>
-
-      <button id="voltarParaFotos">Voltar para Fotos</button>
-    </section>
-
-    <section id="batepapo" class="secao" style="display:none;">
-      <h2>Bate-papo</h2>
-
-      <form id="formBatePapo">
-        <label for="nomeBatePapo">Seu nome:</label><br />
-        <input type="text" id="nomeBatePapo" required /><br />
-
-        <label for="msgBatePapo">Mensagem:</label><br />
-        <textarea id="msgBatePapo" rows="3" required></textarea><br />
-
-        <button type="submit">Enviar</button>
-      </form>
-
-      <div id="listaMensagens" class="listaMensagens"></div>
-    </section>
-  </main>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
 
   <script>
-    // Troca de seções
-    const btnFotos = document.getElementById('btnFotos');
-    const btnCartinhas = document.getElementById('btnCartinhas');
-    const btnBatePapo = document.getElementById('btnBatePapo');
+    // Configuração do Firebase - ATENÇÃO: coloque seu databaseURL correto abaixo!
+    const firebaseConfig = {
+      apiKey: "AIzaSyDY4GfPbpE0b8fz6ZfUOsitiuu2pUcVqRU",
+      authDomain: "amors-18a20.firebaseapp.com",
+      databaseURL: "https://amors-18a20-default-rtdb.firebaseio.com",  // <- ESSENCIAL PARA O REaltime DATABASE
+      projectId: "amors-18a20",
+      storageBucket: "amors-18a20.appspot.com",
+      messagingSenderId: "360392240276",
+      appId: "1:360392240276:web:bdad911a67a074904b9881",
+      measurementId: "G-13GQYQJYDR"
+    };
 
-    const secaoFotos = document.getElementById('fotos');
-    const secaoCartinhas = document.getElementById('cartinhas');
-    const secaoBatePapo = document.getElementById('batepapo');
+    // Inicializa Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
 
-    function mostrarSecao(secao) {
-      secaoFotos.style.display = 'none';
-      secaoCartinhas.style.display = 'none';
-      secaoBatePapo.style.display = 'none';
-
-      if (secao === 'fotos') secaoFotos.style.display = 'block';
-      if (secao === 'cartinhas') secaoCartinhas.style.display = 'block';
-      if (secao === 'batepapo') secaoBatePapo.style.display = 'block';
-    }
-
-    btnFotos.addEventListener('click', () => mostrarSecao('fotos'));
-    btnCartinhas.addEventListener('click', () => mostrarSecao('cartinhas'));
-    btnBatePapo.addEventListener('click', () => mostrarSecao('batepapo'));
-
-    // Voltar para Fotos do Cartinhas
-    document.getElementById('voltarParaFotos').addEventListener('click', () => {
-      mostrarSecao('fotos');
-    });
-
-    // --- Galeria de Fotos ---
-    function carregarFotosGaleria() {
-      const galeria = document.getElementById('galeriaFotos');
-      galeria.innerHTML = '';
-
-      const fotos = JSON.parse(localStorage.getItem('galeriaFotos') || '[]');
-
-      fotos.forEach((foto, index) => {
-        const img = document.createElement('img');
-        img.src = foto.dataURL;
-        img.alt = foto.nome;
-        img.title = foto.nome;
-
-        const wrapper = document.createElement('div');
-        wrapper.classList.add('fotoWrapper');
-
-        wrapper.appendChild(img);
-
-        const btnExcluir = document.createElement('button');
-        btnExcluir.textContent = '×';
-        btnExcluir.title = 'Excluir foto';
-        btnExcluir.classList.add('btnExcluirFoto');
-
-        btnExcluir.addEventListener('click', () => {
-          if (confirm(`Excluir a foto "${foto.nome}"?`)) {
-            fotos.splice(index, 1);
-            localStorage.setItem('galeriaFotos', JSON.stringify(fotos));
-            carregarFotosGaleria();
-          }
-        });
-
-        wrapper.appendChild(btnExcluir);
-        galeria.appendChild(wrapper);
-      });
-    }
-    carregarFotosGaleria();
-
-    // --- Cartinhas ---
-    const formCartinha = document.getElementById('formCartinha');
-    const listaCartinhas = document.getElementById('listaCartinhas');
-
-    function carregarCartinhas() {
-      const cartinhas = JSON.parse(localStorage.getItem('cartinhas') || '[]');
-      listaCartinhas.innerHTML = '';
-      cartinhas.forEach(cartinha => {
-        const div = document.createElement('div');
-        div.className = 'cartinha';
-
-        let conteudo = `<p><strong>${cartinha.nome}</strong> — <em>${cartinha.data}</em></p>`;
-        conteudo += `<p>${cartinha.texto}</p>`;
-
-        if (cartinha.arquivo) {
-          if (cartinha.arquivoTipo.startsWith('image')) {
-            conteudo += `<img src="${cartinha.arquivo}" alt="Arquivo da cartinha" />`;
-          } else {
-            conteudo += `<p><a href="${cartinha.arquivo}" target="_blank">Arquivo anexado</a></p>`;
-          }
-        }
-
-        div.innerHTML = conteudo;
-        listaCartinhas.appendChild(div);
-      });
-    }
-
-    formCartinha.addEventListener('submit', e => {
-      e.preventDefault();
-      const nome = document.getElementById('nomeCartinha').value.trim();
-      const texto = document.getElementById('textoCartinha').value.trim();
-      const arquivoInput = document.getElementById('arquivoCartinha');
-      const arquivo = arquivoInput.files[0];
-
-      if (!nome || !texto) {
-        alert('Por favor, preencha nome e mensagem.');
-        return;
-      }
-
-      const dataAtual = new Date().toLocaleString();
-
-      if (arquivo) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          salvarCartinha({
-            nome,
-            texto,
-            arquivo: reader.result,
-            arquivoTipo: arquivo.type,
-            data: dataAtual
-          });
-        };
-        reader.readAsDataURL(arquivo);
-      } else {
-        salvarCartinha({ nome, texto, arquivo: null, arquivoTipo: '', data: dataAtual });
-      }
-
-      formCartinha.reset();
-    });
-
-    function salvarCartinha(cartinha) {
-      const cartinhas = JSON.parse(localStorage.getItem('cartinhas') || '[]');
-      cartinhas.push(cartinha);
-      localStorage.setItem('cartinhas', JSON.stringify(cartinhas));
-      carregarCartinhas();
-      mostrarSecao('cartinhas');
-    }
-
-    carregarCartinhas();
-
-    // --- Bate-papo ---
-    const formBatePapo = document.getElementById('formBatePapo');
-    const listaMensagens = document.getElementById('listaMensagens');
-
-    function carregarMensagens() {
-      const msgs = JSON.parse(localStorage.getItem('mensagens') || '[]');
-      listaMensagens.innerHTML = '';
-      msgs.forEach(msg => {
-        const div = document.createElement('div');
-        div.className = 'mensagem-batepapo';
-        div.innerHTML = `<strong>${msg.nome}</strong> <em>${msg.data}</em><p>${msg.texto}</p>`;
-        listaMensagens.appendChild(div);
-      });
-    }
-
-    formBatePapo.addEventListener('submit', e => {
-      e.preventDefault();
-      const nome = document.getElementById('nomeBatePapo').value.trim();
-      const texto = document.getElementById('msgBatePapo').value.trim();
-
-      if (!nome || !texto) {
-        alert('Preencha nome e mensagem.');
-        return;
-      }
-
-      const dataAtual = new Date().toLocaleString();
-
-      const novaMsg = { nome, texto, data: dataAtual };
-      const msgs = JSON.parse(localStorage.getItem('mensagens') || '[]');
-      msgs.push(novaMsg);
-      localStorage.setItem('mensagens', JSON.stringify(msgs));
-
-      formBatePapo.reset();
-      carregarMensagens();
-      mostrarSecao('batepapo');
-    });
-
-    carregarMensagens();
+    const database = firebase.database();
+    const storage = firebase.storage();
   </script>
+
+  <script src="app.js"></script>
 </body>
 </html>
