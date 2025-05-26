@@ -39,14 +39,6 @@ input, textarea {
   font-size: 17px;
   font-family: 'Patrick Hand', cursive;
   background: #fffdfa;
-  transition: border-color 0.3s ease;
-}
-
-input:focus,
-textarea:focus {
-  border-color: #ff85a2;
-  outline: none;
-  box-shadow: 0 0 5px rgba(255, 105, 135, 0.3);
 }
 
 button {
@@ -71,37 +63,58 @@ button:hover {
   text-align: left;
 }
 
-/* Estilo visual da cartinha enviada */
 .cartinha {
   background: #fffaf7;
   padding: 20px;
   margin-bottom: 25px;
   border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(255, 105, 135, 0.1);
   border: 2px dotted #f9c5d1;
-  font-family: 'Caveat', cursive;
-  font-size: 20px;
-  line-height: 1.7;
   position: relative;
-  overflow: hidden;
-}
-
-.cartinha::before {
-  content: "💌";
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 22px;
-  opacity: 0.6;
+  font-size: 18px;
 }
 
 .cartinha h3 {
   margin: 0 0 10px;
   color: #bf1650;
-  font-size: 24px;
-  font-family: 'Patrick Hand', cursive;
+  font-size: 22px;
 }
 
 .cartinha p {
-  margin: 0;
+  margin: 0 0 15px;
+  white-space: pre-wrap;
+}
+
+.reacoes {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.reacoes button {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.reacoes button:hover:not(:disabled) {
+  transform: scale(1.2);
+}
+
+.reacoes button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reacoes span {
+  font-size: 16px;
+}
+
+.btn-voltar {
+  display: inline-block;
+  margin-top: 30px;
+  text-decoration: none;
+  color: #d94c74;
+  font-weight: bold;
 }

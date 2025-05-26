@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Cartinhas de Feedback</title>
-   <link rel="icon" href="/image/heart.png" type="image/x-icon" />
+  <link rel="icon" href="/image/heart.png" type="image/x-icon" />
   <link rel="stylesheet" href="cartinha.css" />
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
@@ -11,6 +11,7 @@
 <body>
   <main>
     <h1>Escreva sua Cartinha 💌</h1>
+
     <form id="formCartinha">
       <input type="text" id="titulo" placeholder="Título da cartinha" required />
       <textarea id="mensagem" rows="4" placeholder="Escreva sua mensagem..." required></textarea>
@@ -18,6 +19,8 @@
     </form>
 
     <section id="listaCartinhas"></section>
+
+    <a href="/conteudo.html" class="btn-voltar">⬅ Voltar</a>
   </main>
 
   <script src="cartinha.js"></script>

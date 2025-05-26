@@ -8,40 +8,59 @@ const firebaseConfig = {
   appId: "1:360392240276:web:7910c99a560efc0c4b9881"
 };
 
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-const form = document.getElementById('formBatePapo');
-const lista = document.getElementById('listaMensagens');
+const form = document.getElementById("formCartinha");
+const listaCartinhas = document.getElementById("listaCartinhas");
 
-form.addEventListener('submit', (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const nome = document.getElementById('nome').value.trim();
-  const mensagem = document.getElementById('mensagem').value.trim();
+  const titulo = document.getElementById("titulo").value;
+  const mensagem = document.getElementById("mensagem").value;
 
-  if (!nome || !mensagem) {
-    alert("Preencha o nome e a mensagem.");
-    return;
-  }
-
-  db.ref("mensagens").push({
-    nome,
+  const novaCartinha = {
+    titulo,
     mensagem,
-    timestamp: Date.now()
-  });
+    likes: 0,
+    dislikes: 0
+  };
 
+  db.ref("cartinhas").push(novaCartinha);
   form.reset();
 });
 
-// Mostrar mensagens
-db.ref("mensagens").on("child_added", (snap) => {
-  const msg = snap.val();
-  const data = new Date(msg.timestamp).toLocaleString();
+function carregarCartinhas() {
+  listaCartinhas.innerHTML = "";
 
-  const div = document.createElement("div");
-  div.className = "mensagem-batepapo";
-  div.innerHTML = `<strong>${msg.nome}</strong> (${data}): ${msg.mensagem}`;
-  lista.appendChild(div);
-  lista.scrollTop = lista.scrollHeight;
-});
+  db.ref("cartinhas").on("value", snapshot => {
+    listaCartinhas.innerHTML = ""; // limpar
+    snapshot.forEach(child => {
+      const key = child.key;
+      const cartinha = child.val();
+
+      const div = document.createElement("div");
+      div.className = "cartinha";
+
+      div.innerHTML = `
+        <h3>${cartinha.titulo}</h3>
+        <p>${cartinha.mensagem}</p>
+        <div class="reacoes">
+          <button onclick="votar('${key}', 'likes')">👍</button> <span>${cartinha.likes}</span>
+          <button onclick="votar('${key}', 'dislikes')">👎</button> <span>${cartinha.dislikes}</span>
+        </div>
+      `;
+
+      listaCartinhas.appendChild(div);
+    });
+  });
+}
+
+function votar(id, tipo) {
+  const ref = db.ref("cartinhas/" + id + "/" + tipo);
+  ref.transaction(valor => (valor || 0) + 1);
+}
+
+carregarCartinhas();
