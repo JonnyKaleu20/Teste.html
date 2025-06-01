@@ -17,45 +17,7 @@
       <a href=botoes/fotos.html class="btnFotos" role="button" arial-label="Ir para Fotos">Fotos</a>
     </nav>
 
-    <!-- Seção Fotos -->
-    <section id="fotos" class="secao active">
-      <div class="galeria" id="galeriaFotos"></div>
-    </section>
-
-    <!-- Seção Cartinhas -->
-    <section id="cartinhas" class="secao">
-      <h2>Cartinhas</h2>
-      <form id="formCartinha">
-        <label for="nomeCartinha">Nome:</label>
-        <input type="text" id="nomeCartinha" required />
-
-        <label for="textoCartinha">Mensagem:</label>
-        <textarea id="textoCartinha" rows="4" required></textarea>
-
-        <label for="arquivoCartinha">Enviar foto ou arquivo (opcional):</label>
-        <input type="file" id="arquivoCartinha" />
-
-        <button type="submit">Enviar Cartinha</button>
-      </form>
-      <div id="listaCartinhas" class="listaCartinhas"></div>
-    </section>
-
-    <!-- Seção Bate-Papo -->
-    <section id="batepapo" class="secao">
-      <h2>Bate-papo</h2>
-      <form id="formBatePapo">
-        <label for="nomeBatePapo">Seu nome:</label>
-        <input type="text" id="nomeBatePapo" required />
-
-        <label for="msgBatePapo">Mensagem:</label>
-        <textarea id="msgBatePapo" rows="3" required></textarea>
-
-        <button type="submit">Enviar</button>
-      </form>
-      <div id="listaMensagens" class="listaMensagens"></div>
-    </section>
-  </main>
-
+  
   <!-- Firebase + script -->
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>

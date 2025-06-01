@@ -1,160 +1,108 @@
-/* --- Estilo Geral --- */
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #fff0f5, #ffe6f0);
-  color: #444;
+/* Reset */
+* {
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-main {
-  max-width: 750px;
-  margin: 30px auto;
-  background: #fff5f8;
-  padding: 30px 40px;
-  border-radius: 30px;
-  /* Tira essa sombra pra remover a linha */
-  box-shadow: none; 
-  text-align: center;
-}
-
-h1 {
-  font-size: 2.8rem;
-  color: #d81e5b;
-  margin-bottom: 30px;
-  font-weight: 900;
-  letter-spacing: 2px;
-  text-shadow: 1px 1px 4px #ffa3c2;
-}
-
-nav {
+/* Fundo com corações suaves */
+body {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background: #fff0f5 url('https://i.imgur.com/Ji8pGHb.png') repeat;
+  background-size: 150px;
+  color: #c2185b;
+  padding: 30px;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  gap: 25px;
-  margin-bottom: 40px;
-  border-bottom: none;
-  box-shadow: none;
+  align-items: center;
 }
 
-nav a, nav button {
-  background-color: #ff4d88;
-  color: white;
-  border: none;
-  padding: 14px 28px;
-  border-radius: 30px;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 6px 15px rgba(255, 89, 143, 0.6);
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  text-decoration: none;
+/* Container com aparência de coração */
+main {
+  background: rgba(255, 240, 246, 0.9);
+  border-radius: 50px;
+  padding: 50px 40px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  border: 3px dashed #f06292;
+  box-shadow: 0 0 25px rgba(255, 105, 180, 0.3);
+  animation: fadeInMain 1s ease-out;
 }
 
-nav a:hover, nav button:hover {
-  background-color: #cc0052;
-  transform: scale(1.07);
+/* Título principal */
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: #d63384;
+  animation: fadeInDown 1s ease-out;
 }
 
-/* --- Seções --- */
-
-.secao {
-  display: none;
-  animation: fadeIn 0.6s ease forwards;
-  text-align: left;
-}
-
-.secao.active {
-  display: block;
-}
-
-/* --- Fotos --- */
-
-#fotos {
-  background: #ffe6f0;
-  padding: 0;
-  border-radius: 25px;
-  /* remove sombra para evitar linhas */
-  box-shadow: none;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-#fotos h2 {
-  display: none;
-}
-
-.galeria {
-  margin-top: 0;
-  padding: 25px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+/* Navegação romântica */
+nav {
+  display: flex;
+  flex-direction: column;
   gap: 20px;
-  min-height: 100px;
-  border-radius: 25px;
-  background: #fff0f5;
-  box-shadow: inset 0 0 15px rgba(255, 89, 143, 0.1);
+  align-items: center;
+  animation: fadeInUp 1.5s ease-out;
 }
 
-.galeria img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(255, 89, 143, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.galeria img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 14px 40px rgba(255, 89, 143, 0.7);
-}
-
-/* --- Animação fadeIn --- */
-@keyframes fadeIn {
-  from {opacity: 0; transform: translateY(10px);}
-  to {opacity: 1; transform: translateY(0);}
-}
-
-/* --- Outros Inputs e Botões Gerais --- */
-input[type="text"],
-textarea,
-input[type="file"] {
-  width: 100%;
-  padding: 14px;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  border-radius: 12px;
-  border: 2px solid #ffb6c1;
-  font-size: 15px;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus,
-textarea:focus,
-input[type="file"]:focus {
-  outline: none;
-  border-color: #ff598f;
-  box-shadow: 0 0 8px #ff598f99;
-}
-
-button[type="submit"] {
-  width: 100%;
-  padding: 16px;
-  font-size: 18px;
-  font-weight: 700;
+nav a {
+  background-color: #ff69b4;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 30px;
   border-radius: 30px;
-  border: none;
-  background-color: #ff598f;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 8px 20px rgba(255, 92, 141, 0.5);
-  transition: background-color 0.3s ease, transform 0.25s ease;
+  font-weight: bold;
+  font-size: 1.1em;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
-button[type="submit"]:hover {
-  background-color: #e14572;
+nav a:hover {
+  background-color: #d81b60;
   transform: scale(1.05);
+}
+
+/* Efeitos de entrada */
+@keyframes fadeInMain {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsivo */
+@media (min-width: 600px) {
+  nav {
+    flex-direction: row;
+    justify-content: center;
+  }
 }
