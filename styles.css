@@ -8,8 +8,8 @@
 /* Fundo com corações suaves */
 body {
   font-family: 'Comic Sans MS', cursive, sans-serif;
-  background: #fff0f5 url('https://i.imgur.com/VpYHhO6.png') repeat;
-  background-size: 150px;
+  background: #fff0f5 url('https://cdn.pixabay.com/photo/2018/09/15/12/47/heart-background-3679334_960_720.png') no-repeat center center fixed;
+  background-size: cover;
   color: #c2185b;
   padding: 30px;
   min-height: 100vh;
