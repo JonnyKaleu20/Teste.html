@@ -1,217 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Conteúdos - Amor</title>
-  <link rel="icon" href="image/heart.png" type="image/x-icon" />
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    /* Seu CSS atual aqui (copie da versão anterior) */
-
-    /* Modal - tela para envio da foto */
-    .modal {
-      display: none; /* oculto por padrão */
-      position: fixed;
-      z-index: 999;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background: white;
-      padding: 20px 30px;
-      border-radius: 18px;
-      max-width: 400px;
-      width: 90%;
-      box-shadow: 0 0 15px rgba(255, 92, 141, 0.7);
-      position: relative;
-    }
-    .modal-content h3 {
-      margin-top: 0;
-      color: #ff598f;
-      text-align: center;
-    }
-    .modal-content input[type="password"],
-    .modal-content input[type="file"] {
-      width: 100%;
-      margin-bottom: 15px;
-      padding: 10px;
-      border-radius: 12px;
-      border: 2px solid #ffb6c1;
-      font-size: 15px;
-    }
-    .modal-content button {
-      background-color: #ff598f;
-      border: none;
-      padding: 12px;
-      border-radius: 18px;
-      color: white;
-      font-weight: 700;
-      width: 100%;
-      cursor: pointer;
-      box-shadow: 0 6px 12px rgba(255, 92, 141, 0.5);
-      transition: background-color 0.3s ease;
-    }
-    .modal-content button:hover {
-      background-color: #e14572;
-    }
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 18px;
-      font-size: 24px;
-      font-weight: 700;
-      color: #ff598f;
-      cursor: pointer;
-    }
-    #msgFoto {
-      text-align: center;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Bem-vindo(a)</title>
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <main>
-    <h1>Bem-vindo Amor 💌</h1>
-
-    <nav>
-      <a href="botoes/cartinha.html" class="btnCartinhas" role="button" aria-label="Ir para Cartinhas">Cartinhas</a>
-      <a href="botoes/batepapo.html" class="btnBatePapo" role="button" aria-label="Ir para Bate Papos">Bate Papos</a>
-      <button id="btnFotos" class="btnFotos" aria-label="Mostrar Fotos">Fotos</button>
-      <a href="botoes/admin.html" class="btnAdmin" role="button" aria-label="Área Administrativa">Área Admin</a>
-    </nav>
-
-    <!-- Seção Fotos -->
-    <section id="fotos" class="secao active">
-      <h2>Nossas Fotos</h2>
-      <div class="galeria" id="galeriaFotos"></div>
-    </section>
-
-    <!-- Modal para enviar foto com senha -->
-    <div id="modalFoto" class="modal">
-      <div class="modal-content">
-        <span id="closeModal" class="close-btn">&times;</span>
-        <h3>Enviar Foto (Senha necessária)</h3>
-        <p id="msgFoto"></p>
-        <input type="password" id="senhaFoto" placeholder="Digite a senha" />
-        <input type="file" id="fotoUpload" accept="image/*" />
-        <button id="btnEnviarFoto">Enviar Foto</button>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+  <div class="container">
+    <h1>Bem-vindo(a)</h1>
+    <p>Digite a senha para entrar:</p>
+    <input type="password" id="senha" placeholder="Senha">
+    <button onclick="verificarSenha()">Entrar</button>
+    <p id="mensagemErro" class="erro"></p>
+  </div>
 
   <script>
-    // Config Firebase (substitua pelos seus dados)
-    const firebaseConfig = {
-      apiKey: "SUA_API_KEY",
-      authDomain: "SEU_DOMINIO",
-      databaseURL: "https://SEU_PROJETO.firebaseio.com",
-      projectId: "SEU_PROJETO",
-      storageBucket: "SEU_BUCKET.appspot.com",
-      messagingSenderId: "SEU_ID",
-      appId: "SEU_APP_ID"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-    const storage = firebase.storage();
-
-    // Elementos
-    const btnFotos = document.getElementById('btnFotos');
-    const modal = document.getElementById('modalFoto');
-    const closeModal = document.getElementById('closeModal');
-    const btnEnviarFoto = document.getElementById('btnEnviarFoto');
-    const senhaFoto = document.getElementById('senhaFoto');
-    const fotoUpload = document.getElementById('fotoUpload');
-    const msgFoto = document.getElementById('msgFoto');
-    const galeriaFotos = document.getElementById('galeriaFotos');
-
-    // Mostrar modal ao clicar no botão Fotos
-    btnFotos.addEventListener('click', () => {
-      modal.style.display = 'flex';
-      msgFoto.textContent = '';
-      senhaFoto.value = '';
-      fotoUpload.value = '';
-    });
-
-    // Fechar modal
-    closeModal.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-
-    // Enviar foto com validação da senha
-    btnEnviarFoto.addEventListener('click', () => {
-      const senha = senhaFoto.value.trim();
-      if (senha !== 'KaleueMari') {
-        msgFoto.textContent = 'Senha incorreta.';
-        msgFoto.style.color = 'red';
-        return;
-      }
-
-      const file = fotoUpload.files[0];
-      if (!file) {
-        msgFoto.textContent = 'Selecione uma foto para enviar.';
-        msgFoto.style.color = 'red';
-        return;
-      }
-
-      msgFoto.textContent = 'Enviando...';
-      msgFoto.style.color = '#333';
-
-      // Upload da foto
-      const ref = storage.ref('fotos/' + Date.now() + '_' + file.name);
-      ref.put(file).then(() => ref.getDownloadURL())
-        .then(url => {
-          return db.ref('fotos').push({ url, timestamp: Date.now() });
-        })
-        .then(() => {
-          msgFoto.textContent = 'Foto enviada com sucesso!';
-          msgFoto.style.color = 'green';
-          senhaFoto.value = '';
-          fotoUpload.value = '';
-          modal.style.display = 'none';
-        })
-        .catch(err => {
-          msgFoto.textContent = 'Erro ao enviar: ' + err.message;
-          msgFoto.style.color = 'red';
-        });
-    });
-
-    // Mostrar fotos em tempo real
-    function atualizarGaleria() {
-      galeriaFotos.innerHTML = '';
-      db.ref('fotos').orderByChild('timestamp').on('value', snapshot => {
-        galeriaFotos.innerHTML = '';
-        snapshot.forEach(child => {
-          const foto = child.val();
-          const img = document.createElement('img');
-          img.src = foto.url;
-          img.alt = 'Foto enviada';
-          img.style.maxWidth = '180px';
-          img.style.margin = '10px';
-          img.style.borderRadius = '14px';
-          img.style.boxShadow = '0 5px 12px rgba(255, 92, 141, 0.4)';
-          galeriaFotos.appendChild(img);
-        });
-      });
-    }
-
-    atualizarGaleria();
-
-    // Fechar modal clicando fora da área modal
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
+    function verificarSenha() {
+      const senha = document.getElementById('senha').value;
+      if (senha === "KaleueMari") {
+        window.location.href = "conteudo.html";
+      } else {
+        document.getElementById("mensagemErro").textContent = "Senha incorreta.";
       }
     }
   </script>
