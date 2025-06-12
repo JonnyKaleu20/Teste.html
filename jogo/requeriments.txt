@@ -1,0 +1,5 @@
+Set-Content -Path requirements.txt -Value @(
+  "Flask"
+  "flask-socketio"
+  "eventlet"
+)
