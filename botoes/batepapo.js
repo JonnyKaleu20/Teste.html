@@ -7,6 +7,19 @@ const firebaseConfig = {
   messagingSenderId: "360392240276",
   appId: "1:360392240276:web:7910c99a560efc0c4b9881"
 };
+db.on("child_added", (snapshot) => {
+  const msg = snapshot.val();
+  const li = document.createElement("li");
+  li.innerHTML = `<strong>${msg.nome}</strong> <small>(${msg.horario})</small><br>${msg.mensagem}`;
+  mensagens.appendChild(li);
+  mensagens.scrollTop = mensagens.scrollHeight;
+
+  // 🔔 Toca o som de notificação
+  const msgSound = document.getElementById("msgSound");
+  if (msgSound) {
+    msgSound.play().catch(e => console.log("Som bloqueado até interação do usuário."));
+  }
+});
 
 
 firebase.initializeApp(firebaseConfig);

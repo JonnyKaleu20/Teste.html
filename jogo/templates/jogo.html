@@ -1,37 +1,41 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Desenhe com seu Amor 💖</title>
-    <link rel="stylesheet" href="/jogo/jogo.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jogo Clique no Coração 💖</title>
+<link rel="stylesheet" href="jogo.css" />
 </head>
 <body>
 
-    <div class="top-bar">
-        <a href="/conteudo.html">🏠 Home</a>
-        <h1>Desenhe com seu amor 💖</h1>
-        <div></div>
+<div class="container">
+
+  <header>
+    <h1>Jogo: Clique Rápido no Coração</h1>
+    <div id="ranking">
+      <div><strong>1º Lugar:</strong> <span id="firstName">-</span> — <span id="firstScore">0</span> pts 🏆</div>
+      <div><strong>2º Lugar:</strong> <span id="secondName">-</span> — <span id="secondScore">0</span> pts 🥈</div>
     </div>
+  </header>
 
-    <div class="controls">
-        <label for="colorPicker">🎨 Cor do pincel:</label>
-        <input type="color" id="colorPicker" value="#d63384">
-        <button onclick="clearCanvas()">🧼 Limpar tela</button>
-        <button onclick="salvarDesenho()">💾 Salvar desenho</button>
+  <section id="characterSelect">
+    <h2>Escolha seu personagem</h2>
+    <div class="characters">
+      <button class="char-btn" data-name="Kaleu">👦 Kaleu</button>
+      <button class="char-btn" data-name="Mariella">👧 Mariella</button>
     </div>
+  </section>
 
-    <canvas id="canvas" width="800" height="600"></canvas>
+  <section id="gameSection" class="hidden">
+    <div id="scoreDisplay">Sua pontuação: 0</div>
+    <div id="gameArea">
+      <button id="heartBtn" aria-label="Coração">❤️</button>
+    </div>
+    <button id="startBtn">Começar Jogo</button>
+  </section>
 
-    <audio autoplay loop>
-        <script src="{{ url_for('static', filename='script.js') }}"></script>
+</div>
 
-        <source src="{{ url_for('static', filename='musica-romantica.mp3') }}" type="audio/mpeg">
-        Seu navegador não suporta áudio.
-    </audio>
-
-    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
-
-
+<script src="jogo.js"></script>
 </body>
 </html>

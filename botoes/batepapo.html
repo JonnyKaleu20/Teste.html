@@ -3,99 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <title>💬 Bate-Papo em Tempo Real</title>
-   <link rel="icon" href="image/heart.png" type="image/x-icon" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fff0f5;
-      padding: 20px;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    h1 {
-      color: #cc0052;
-    }
-
-    #chatBox {
-      width: 100%;
-      max-width: 600px;
-      background-color: white;
-      border: 2px solid #ff4d88;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    #messages {
-      max-height: 400px;
-      overflow-y: auto;
-      margin-bottom: 10px;
-      list-style: none;
-      padding: 0;
-    }
-
-    #messages li {
-      background-color: #ffe6e6;
-      border: 1px solid #ffcce0;
-      border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 8px;
-    }
-
-    #chatForm {
-      display: flex;
-      gap: 10px;
-      flex-direction: column;
-    }
-
-    input, textarea {
-      padding: 12px 15px;
-      border-radius: 8px;
-      border: 1px solid #ff4d88;
-      width: 100%;
-      font-size: 16px;
-      transition: border-color 0.3s ease;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: #cc0052;
-      box-shadow: 0 0 8px rgba(204, 0, 82, 0.5);
-    }
-
-    input::placeholder, textarea::placeholder {
-      color: #ff80aa;
-      font-style: italic;
-    }
-
-    button {
-      padding: 12px 20px;
-      background-color: #ff4d88;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 18px;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    button:hover {
-      background-color: #cc0052;
-    }
-
-    #backBtn {
-      margin-top: 20px;
-    }
-  </style>
+  <link rel="stylesheet" href="batepapo.css">
+  <link rel="icon" href="image/heart.png" type="image/x-icon" />
 </head>
 <body>
+
+  <audio id="msgSound" src="https://cdn.pixabay.com/download/audio/2022/03/01/audio_6d3ccf9c3d.mp3" preload="auto"></audio>
+
 
   <h1>💬 Bate-Papo do Amor</h1>
 
@@ -110,7 +24,7 @@
   </div>
 
   <div id="backBtn">
-   <button onclick="window.location.href='../conteudo.html'"> Voltar</button>
+    <button onclick="window.location.href='../conteudo.html'">Voltar</button>
   </div>
 
   <!-- Firebase SDKs -->

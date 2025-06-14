@@ -1,59 +1,98 @@
-body {
-  background: #ffe6f0 url('https://cdn.pixabay.com/photo/2018/09/15/12/47/heart-background-3679334_960_720.png') no-repeat center center fixed;
-  background-size: cover;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  text-align: center;
-  padding-top: 100px;
-  color: #d63384;
-  min-height: 100vh;
-}
-.imagem-amor {
-  width: 100%;
-  max-width: 260px;
-  margin-top: 20px;
-  border-radius: 15px;
-  box-shadow: 0 0 12px rgba(255, 105, 180, 0.3);
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
+body {
+  background-image: url('https://s1.1zoom.me/b4341/263/Texture_Vector_Graphics_Heart_533729_1920x1080.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+}
 
 .container {
-  background-color: #fff0f6;
-  border: 2px dashed #ff69b4;
-  padding: 30px;
-  border-radius: 20px;
-  width: 300px;
-  margin: auto;
-  box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+  background-color: rgba(255, 255, 255, 0.92);
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+
+h1 {
+  color: #d6336c;
+  margin-bottom: 15px;
+}
+
+p {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #555;
 }
 
 input[type="password"] {
-  padding: 10px;
-  border: 2px solid #ff69b4;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
   border-radius: 10px;
-  width: 80%;
-  margin-top: 10px;
-  font-size: 16px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+input[type="password"]:focus {
+  border-color: #ff6b9a;
 }
 
 button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  background-color: #ff69b4;
+  width: 100%;
+  padding: 12px;
+  background-color: #ff6b9a;
   border: none;
-  border-radius: 10px;
   color: white;
-  font-weight: bold;
+  font-size: 16px;
+  border-radius: 10px;
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 button:hover {
-  background-color: #d63384;
+  background-color: #e74c8b;
+  transform: scale(1.02);
 }
 
 .erro {
   color: red;
   margin-top: 10px;
+}
+
+.imagem-amor {
+  margin-top: 20px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(255, 107, 154, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.imagem-amor:hover {
+  transform: scale(1.03);
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 22px;
+  }
+  p, input, button {
+    font-size: 14px;
+  }
 }
