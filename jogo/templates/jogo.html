@@ -1,41 +1,42 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Jogo Clique no Coração 💖</title>
-<link rel="stylesheet" href="jogo.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jogo da Forca - Amor</title>
+  <link rel="stylesheet" href="jogo.css" />
 </head>
 <body>
+  <div class="container">
 
-<div class="container">
-
-  <header>
-    <h1>Jogo: Clique Rápido no Coração</h1>
-    <div id="ranking">
-      <div><strong>1º Lugar:</strong> <span id="firstName">-</span> — <span id="firstScore">0</span> pts 🏆</div>
-      <div><strong>2º Lugar:</strong> <span id="secondName">-</span> — <span id="secondScore">0</span> pts 🥈</div>
+    <!-- Tela Inicial -->
+    <div id="tela-inicial">
+      <h1>Jogo da Forca do Amor ❤️</h1>
+      <div class="personagens">
+        <div class="personagem" onclick="selecionarPersonagem('Mari')">
+          <img src="Mari.png" alt="Mari" />
+          <p>Mari</p>
+          <div class="ranking" id="ranking-mari">🏆 0</div>
+        </div>
+        <div class="personagem" onclick="selecionarPersonagem('Kaleu')">
+          <img src="Kaleu.png" alt="Kaleu" />
+          <p>Kaleu</p>
+          <div class="ranking" id="ranking-kaleu">🏆 0</div>
+        </div>
+      </div>
     </div>
-  </header>
 
-  <section id="characterSelect">
-    <h2>Escolha seu personagem</h2>
-    <div class="characters">
-      <button class="char-btn" data-name="Kaleu">👦 Kaleu</button>
-      <button class="char-btn" data-name="Mariella">👧 Mariella</button>
+    <!-- Tela do Jogo -->
+    <div id="tela-jogo" class="hidden">
+      <h2 id="personagem-selecionado"></h2>
+      <p>Tema: Amor 💘</p>
+      <div id="palavra"></div>
+      <div id="teclado"></div>
+      <p>Chances restantes: <span id="chances">10</span></p>
+      <button onclick="voltarInicio()">Voltar ao Início</button>
     </div>
-  </section>
 
-  <section id="gameSection" class="hidden">
-    <div id="scoreDisplay">Sua pontuação: 0</div>
-    <div id="gameArea">
-      <button id="heartBtn" aria-label="Coração">❤️</button>
-    </div>
-    <button id="startBtn">Começar Jogo</button>
-  </section>
-
-</div>
-
-<script src="jogo.js"></script>
+  </div>
+  <script src="jogo.js"></script>
 </body>
 </html>

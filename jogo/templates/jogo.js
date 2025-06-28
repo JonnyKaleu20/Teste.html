@@ -1,111 +1,92 @@
-const characterButtons = document.querySelectorAll('.char-btn');
-const characterSelectSection = document.getElementById('characterSelect');
-const gameSection = document.getElementById('gameSection');
-const heartBtn = document.getElementById('heartBtn');
-const scoreDisplay = document.getElementById('scoreDisplay');
-const startBtn = document.getElementById('startBtn');
-
-const firstNameSpan = document.getElementById('firstName');
-const firstScoreSpan = document.getElementById('firstScore');
-const secondNameSpan = document.getElementById('secondName');
-const secondScoreSpan = document.getElementById('secondScore');
-
-let playerName = '';
-let score = 0;
-let gameActive = false;
-let gameTimer = null;
-
-let ranking = [
-  { name: '-', score: 0 },
-  { name: '-', score: 0 }
+const palavras = [
+  "beijo", "carinho", "abraço", "amor", "namoro", "coração",
+  "paixão", "encontro", "saudade", "desejo",
+  "casal", "alma gêmea", "amor eterno", "doçura", "sorriso",
+  "romance", "declaração", "companheirismo", "cumplicidade", "sedução",
+  "afeto", "sintonia", "harmonia", "encanto", "olhar",
+  "suspiro", "confiança", "eternidade", "aliança", "emoção",
+  "felicidade", "lealdade", "promessa", "atração", "magia",
+  "flerte", "amado", "amada", "inspiração", "ternura"
 ];
 
-// Selecionar personagem
-characterButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    characterButtons.forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    playerName = btn.dataset.name;
+let personagemAtual = "";
+let palavraAtual = "";
+let chances = 10;
+let acertos = 0;
+let letrasUsadas = [];
+let rankings = {
+  Mari: 0,
+  Kaleu: 0
+};
 
-    // Mostrar seção do jogo e esconder seleção
-    characterSelectSection.classList.add('hidden');
-    gameSection.classList.remove('hidden');
-
-    score = 0;
-    updateScoreDisplay();
-  });
-});
-
-// Atualiza a pontuação na tela
-function updateScoreDisplay() {
-  scoreDisplay.textContent = `Sua pontuação: ${score}`;
+function selecionarPersonagem(nome) {
+  personagemAtual = nome;
+  document.getElementById('tela-inicial').classList.add('hidden');
+  document.getElementById('tela-jogo').classList.remove('hidden');
+  document.getElementById('personagem-selecionado').textContent = "Jogando com " + nome;
+  iniciarJogo();
 }
 
-// Atualiza o ranking de acordo com a pontuação atual
-function updateRanking() {
-  // Atualiza o ranking só se pontuação for maior que um dos dois
-  if (score > ranking[0].score) {
-    if (playerName !== ranking[0].name) {
-      ranking[1] = { ...ranking[0] }; // passa o atual 1º para 2º
-    }
-    ranking[0] = { name: playerName, score };
-  } else if (score > ranking[1].score && playerName !== ranking[0].name) {
-    ranking[1] = { name: playerName, score };
+function iniciarJogo() {
+  palavraAtual = palavras[Math.floor(Math.random() * palavras.length)].toUpperCase();
+  chances = 10;
+  letrasUsadas = [];
+  atualizarPalavra();
+  atualizarChances();
+  criarTeclado();
+}
+
+function atualizarPalavra() {
+  const display = palavraAtual.split("").map(letra => letrasUsadas.includes(letra) ? letra : "_").join(" ");
+  document.getElementById("palavra").textContent = display;
+
+  if (!display.includes("_")) {
+    alert("Parabéns! Você acertou! 💖");
+    rankings[personagemAtual]++;
+    atualizarRanking();
+    iniciarJogo();
   }
-
-  firstNameSpan.textContent = ranking[0].name;
-  firstScoreSpan.textContent = ranking[0].score;
-  secondNameSpan.textContent = ranking[1].name;
-  secondScoreSpan.textContent = ranking[1].score;
 }
 
-// Tocar som de clique no coração
-function playClickSound() {
-  const audio = new Audio('https://cdn.pixabay.com/download/audio/2022/03/01/audio_6d3ccf9c3d.mp3?filename=pop-click-6360.mp3');
-  audio.volume = 0.3;
-  audio.play().catch(() => {});
+function atualizarChances() {
+  document.getElementById("chances").textContent = chances;
+  if (chances <= 0) {
+    alert("Você perdeu! A palavra era: " + palavraAtual);
+    iniciarJogo();
+  }
 }
 
-// Começar o jogo
-startBtn.addEventListener('click', () => {
-  if (gameActive) return;
+function criarTeclado() {
+  const teclado = document.getElementById("teclado");
+  teclado.innerHTML = "";
+  const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  letras.split("").forEach(letra => {
+    const botao = document.createElement("button");
+    botao.textContent = letra;
+    botao.disabled = letrasUsadas.includes(letra);
+    botao.onclick = () => tentarLetra(letra);
+    teclado.appendChild(botao);
+  });
+}
 
-  score = 0;
-  updateScoreDisplay();
-  gameActive = true;
-  startBtn.disabled = true;
+function tentarLetra(letra) {
+  letrasUsadas.push(letra);
+  if (palavraAtual.includes(letra)) {
+    atualizarPalavra();
+  } else {
+    chances--;
+    atualizarChances();
+  }
+  criarTeclado();
+}
 
-  // Duração do jogo: 15 segundos
-  gameTimer = setTimeout(() => {
-    gameActive = false;
-    startBtn.disabled = false;
-    updateRanking();
-    alert(`Tempo esgotado! Sua pontuação final: ${score}`);
-  }, 15000);
-});
+function atualizarRanking() {
+  document.getElementById("ranking-mari").textContent = `🏆 ${rankings.Mari}`;
+  document.getElementById("ranking-kaleu").textContent = `🏆 ${rankings.Kaleu}`;
+}
 
-// Clique no coração aumenta a pontuação se o jogo estiver ativo
-heartBtn.addEventListener('click', () => {
-  if (!gameActive) return;
-
-  score++;
-  updateScoreDisplay();
-  playClickSound();
-
-  // Move o coração para uma nova posição aleatória dentro da área do jogo
-  moveHeartRandomly();
-});
-
-// Função para mover o coração aleatoriamente dentro do gameArea
-function moveHeartRandomly() {
-  const area = document.getElementById('gameArea');
-  const maxX = area.clientWidth - heartBtn.clientWidth;
-  const maxY = area.clientHeight - heartBtn.clientHeight;
-
-  const randX = Math.random() * maxX;
-  const randY = Math.random() * maxY;
-
-  heartBtn.style.position = 'absolute';
-  heartBtn.style.left = `${randX}px`;
-  heartBtn.style.top = `${randY}px`;
+function voltarInicio() {
+  document.getElementById('tela-inicial').classList.remove('hidden');
+  document.getElementById('tela-jogo').classList.add('hidden');
+  atualizarRanking();
 }

@@ -1,141 +1,150 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+/* Fonte romântica */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-* {
-  margin:0; padding:0; box-sizing: border-box;
-  font-family: 'Quicksand', sans-serif;
-}
-
-body, html {
-  height: 100%;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Pacifico', cursive;
+  background: url('https://wallpaperset.com/w/full/0/b/6/128412.jpg') center/cover no-repeat fixed, 
+              linear-gradient(145deg, #ffe0ec, #ffd6e0);
+  background-blend-mode: lighten;
+  color: #b30059;
   display: flex;
   justify-content: center;
   align-items: center;
-  user-select: none;
+  height: 100vh;
+  overflow: hidden;
+}
+.botao-voltar {
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 12px 24px;
+  background-color: #ff80ab;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1em;
+  border-radius: 30px;
+  font-family: 'Pacifico', cursive;
+  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+.botao-voltar:hover {
+  background-color: #ff4081;
+  transform: scale(1.05);
+  text-shadow: 1px 1px 2px #fff;
+}
+
+
+
 .container {
-  width: 360px;
-  background: rgba(255,255,255,0.95);
-  border-radius: 25px;
-  box-shadow: 0 10px 30px rgba(255,64,129,0.5);
-  padding: 20px;
   text-align: center;
+  padding: 20px;
+  background-color: #fff0f5;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(255, 105, 180, 0.2);
+  width: 90%;
+  max-width: 600px;
   position: relative;
 }
 
-h1 {
-  color: #e91e63;
-  margin-bottom: 15px;
-  text-shadow: 1px 1px 4px #ff80ab;
+h1, h2, p {
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px #ff99cc;
 }
 
-#ranking {
+.personagens {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 20px;
-  font-weight: 700;
-  color: #c2185b;
-  font-size: 16px;
-  text-shadow: 0 0 3px #ff80ab;
+  margin-top: 30px;
 }
 
-#characterSelect h2 {
-  margin-bottom: 12px;
-  color: #d81b60;
-  text-shadow: 1px 1px 3px #ff80ab;
-}
-
-.characters {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.char-btn {
-  padding: 12px 20px;
-  font-size: 18px;
-  border-radius: 15px;
-  border: 2px solid #e91e63;
-  background: white;
+.personagem {
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  box-shadow: 0 5px 10px #f48fb1;
-  user-select: none;
+  transition: transform 0.3s ease;
+  position: relative;
 }
 
-.char-btn:hover, .char-btn.selected {
-  background-color: #e91e63;
-  color: white;
-  box-shadow: 0 8px 20px #ff4081;
+.personagem:hover {
+  transform: scale(1.1);
 }
 
-.hidden {
+.personagem img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid #ff66a3;
+  box-shadow: 0 0 10px #ff99cc;
+  transition: all 0.3s ease;
+}
+
+.personagem p {
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+.ranking {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #ffb3d9;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.9em;
+}
+
+#tela-jogo.hidden {
   display: none;
 }
 
-#gameSection h2 {
-  margin-bottom: 10px;
-  color: #c2185b;
+#tela-jogo {
+  animation: fadeIn 1s ease-in-out;
 }
 
-#scoreDisplay {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 15px;
-  color: #880e4f;
-  text-shadow: 1px 1px 3px #ff80ab;
+#palavra {
+  font-size: 2em;
+  margin: 20px 0;
+  letter-spacing: 10px;
 }
 
-#gameArea {
-  background: linear-gradient(135deg, #ff80ab, #ff4081);
-  border-radius: 25px;
-  height: 300px;
-  position: relative;
-  box-shadow: inset 0 0 40px #f48fb1aa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 15px;
-  overflow: hidden;
+#teclado {
+  margin: 20px 0;
 }
 
-#heartBtn {
-  font-size: 80px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  user-select: none;
-  position: relative;
-  animation: pulse 1s infinite;
-  transition: transform 0.15s ease;
-}
-
-#heartBtn:active {
-  transform: scale(1.3);
-  animation-play-state: paused;
-}
-
-#startBtn {
-  background: linear-gradient(135deg, #f06292, #ec407a);
-  border: none;
-  padding: 12px 25px;
-  font-size: 18px;
-  font-weight: 700;
-  border-radius: 25px;
+button {
+  background-color: #ff66a3;
   color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
   cursor: pointer;
-  box-shadow: 0 8px 25px rgba(255,64,129,0.6);
+  font-size: 1em;
   transition: background-color 0.3s ease;
-  user-select: none;
 }
 
-#startBtn:hover {
-  background-color: #c2185b;
+button:hover {
+  background-color: #ff3385;
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+/* Animação suave ao exibir */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Corações animados */
+body::after {
+  content: "💖 💘 💝 💗 💓 💞";
+  font-size: 24px;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: heartsFloat 5s infinite linear;
+}
+
+@keyframes heartsFloat {
+  0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(-100px); opacity: 0; }
 }
