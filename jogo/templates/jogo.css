@@ -1,67 +1,90 @@
-/* Fonte romântica */
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap');
 
-body {
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: 'Pacifico', cursive;
-  background: url('https://wallpaperset.com/w/full/0/b/6/128412.jpg') center/cover no-repeat fixed, 
-              linear-gradient(145deg, #ffe0ec, #ffd6e0);
-  background-blend-mode: lighten;
+  background: url('https://s1.1zoom.me/b4341/263/Texture_Vector_Graphics_Heart_533729_1920x1080.jpg') no-repeat center center fixed;
+  background-size: cover;
   color: #b30059;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 20px;
   overflow: hidden;
-}
-.botao-voltar {
-  display: inline-block;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  padding: 12px 24px;
-  background-color: #ff80ab;
-  color: white;
-  text-decoration: none;
-  font-size: 1.1em;
-  border-radius: 30px;
-  font-family: 'Pacifico', cursive;
-  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  position: relative;
+  animation: fadeIn 1.2s ease;
 }
 
-.botao-voltar:hover {
-  background-color: #ff4081;
-  transform: scale(1.05);
-  text-shadow: 1px 1px 2px #fff;
+body::after {
+  content: "💖 💘 💝 💗 💓 💞";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  opacity: 0.3;
+  animation: floatHearts 12s linear infinite;
+  pointer-events: none;
 }
 
-
+@keyframes floatHearts {
+  0% { transform: translateX(-50%) translateY(0); opacity: 0.3; }
+  100% { transform: translateX(-50%) translateY(100vh); opacity: 0; }
+}
 
 .container {
+  background-color: rgba(255, 240, 245, 0.95);
+  padding: 30px 20px;
+  border-radius: 25px;
+  box-shadow: 0 12px 30px rgba(255, 105, 180, 0.3);
+  width: 100%;
+  max-width: 480px;
   text-align: center;
-  padding: 20px;
-  background-color: #fff0f5;
-  border-radius: 20px;
-  box-shadow: 0 8px 16px rgba(255, 105, 180, 0.2);
-  width: 90%;
-  max-width: 600px;
   position: relative;
+  animation: slideUp 1.5s ease;
+  backdrop-filter: blur(8px);
 }
 
-h1, h2, p {
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(60px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+h1, h2 {
   margin-bottom: 20px;
   text-shadow: 1px 1px 2px #ff99cc;
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px #ff80ab; }
+  to { text-shadow: 0 0 15px #ff4081; }
+}
+
+p {
+  margin-bottom: 10px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1em;
+  color: #77003c;
 }
 
 .personagens {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 30px;
   margin-top: 30px;
+  flex-wrap: wrap;
 }
 
 .personagem {
   cursor: pointer;
+  text-align: center;
   transition: transform 0.3s ease;
   position: relative;
 }
@@ -75,13 +98,14 @@ h1, h2, p {
   height: 100px;
   border-radius: 50%;
   border: 4px solid #ff66a3;
-  box-shadow: 0 0 10px #ff99cc;
+  box-shadow: 0 0 12px #ff99cc;
   transition: all 0.3s ease;
 }
 
 .personagem p {
   margin-top: 10px;
   font-size: 1.2em;
+  color: #d6336c;
 }
 
 .ranking {
@@ -91,7 +115,29 @@ h1, h2, p {
   background-color: #ffb3d9;
   padding: 5px 10px;
   border-radius: 20px;
-  font-size: 0.9em;
+  font-size: 0.85em;
+  font-family: 'Quicksand', sans-serif;
+  box-shadow: 0 2px 6px rgba(255, 105, 180, 0.3);
+}
+
+.botao-voltar {
+  display: inline-block;
+  margin: 15px 0;
+  padding: 12px 24px;
+  background-color: #ff80ab;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1em;
+  border-radius: 30px;
+  font-family: 'Pacifico', cursive;
+  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.botao-voltar:hover {
+  background-color: #ff4081;
+  transform: scale(1.05);
+  text-shadow: 1px 1px 2px #fff;
 }
 
 #tela-jogo.hidden {
@@ -103,15 +149,17 @@ h1, h2, p {
 }
 
 #palavra {
-  font-size: 2em;
+  font-size: 2.2em;
   margin: 20px 0;
-  letter-spacing: 10px;
+  letter-spacing: 12px;
+  font-family: 'Quicksand', sans-serif;
 }
 
 #teclado {
   margin: 20px 0;
 }
 
+/* Botão do jogo */
 button {
   background-color: #ff66a3;
   color: white;
@@ -120,31 +168,43 @@ button {
   border-radius: 30px;
   cursor: pointer;
   font-size: 1em;
-  transition: background-color 0.3s ease;
+  font-family: 'Quicksand', sans-serif;
+  box-shadow: 0 6px 14px rgba(255, 105, 180, 0.3);
+  transition: 0.3s ease;
 }
 
 button:hover {
   background-color: #ff3385;
+  transform: scale(1.03);
 }
 
-/* Animação suave ao exibir */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+/* Mobile Responsivo */
+@media (max-width: 480px) {
+  .container {
+    padding: 25px 15px;
+  }
 
-/* Corações animados */
-body::after {
-  content: "💖 💘 💝 💗 💓 💞";
-  font-size: 24px;
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: heartsFloat 5s infinite linear;
-}
+  h1 {
+    font-size: 24px;
+  }
 
-@keyframes heartsFloat {
-  0% { transform: translateX(-50%) translateY(0); opacity: 1; }
-  100% { transform: translateX(-50%) translateY(-100px); opacity: 0; }
+  .personagens {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  #palavra {
+    font-size: 1.8em;
+    letter-spacing: 8px;
+  }
+
+  button, .botao-voltar {
+    font-size: 0.95em;
+    padding: 10px 20px;
+  }
+
+  .personagem img {
+    width: 90px;
+    height: 90px;
+  }
 }

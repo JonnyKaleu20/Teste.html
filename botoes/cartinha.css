@@ -17,17 +17,42 @@ body {
   align-items: center;
   padding: 15px;
   overflow-y: auto;
+  position: relative;
+}
+
+/* Efeitos de corações flutuando */
+body::before {
+  content: "💖 💘 💝 💗 💓 💞";
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 48px;
+  animation: floatHearts 10s infinite linear;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes floatHearts {
+  0% {
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    transform: translateX(-50%) translateY(100vh);
+  }
 }
 
 main {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
   border-radius: 25px;
   box-shadow: 0 15px 30px rgba(233, 30, 99, 0.4);
   padding: 30px 25px;
   width: 100%;
   max-width: 400px;
   animation: fadeInUp 1s ease forwards;
+  z-index: 1;
 }
 
 h1 {
@@ -36,7 +61,7 @@ h1 {
   font-size: 28px;
   margin-bottom: 25px;
   text-align: center;
-  text-shadow: 1px 1px 3px #ff80ab;
+  text-shadow: 1px 1px 4px #ff80ab;
   animation: pulse 2.5s infinite;
 }
 
@@ -54,14 +79,15 @@ textarea {
   border: 2px solid #e91e63;
   font-size: 16px;
   resize: none;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  background: #fff0f5;
   box-shadow: inset 0 0 5px #ff80ab;
+  transition: all 0.3s ease-in-out;
 }
 
 input[type="text"]:focus,
 textarea:focus {
   border-color: #ff4081;
-  box-shadow: 0 0 12px #ff4081;
+  box-shadow: 0 0 12px #ff4081, inset 0 0 8px #ffe6f1;
   outline: none;
 }
 
@@ -76,13 +102,31 @@ button[type="submit"] {
   border-radius: 20px;
   cursor: pointer;
   box-shadow: 0 8px 15px rgba(255, 64, 129, 0.5);
-  transition: transform 0.25s ease, box-shadow 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.3s ease;
   user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+button[type="submit"]::after {
+  content: "❤️";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  opacity: 0.7;
+  transition: right 0.3s ease;
 }
 
 button[type="submit"]:hover {
   transform: scale(1.05);
+  background: linear-gradient(135deg, #ff5c8d, #f48fb1);
   box-shadow: 0 12px 25px rgba(255, 64, 129, 0.7);
+}
+
+button[type="submit"]:hover::after {
+  right: 10px;
 }
 
 button[type="submit"]:active {
@@ -98,8 +142,9 @@ button[type="submit"]:active {
   border: 2px solid #ff80ab;
   border-radius: 18px;
   padding: 15px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   box-shadow: inset 0 0 10px #ff80ab;
+  transition: all 0.3s ease-in-out;
 }
 
 /* Cada cartinha */
@@ -141,7 +186,7 @@ a.btn-voltar {
   text-decoration: none;
   text-align: center;
   box-shadow: 0 8px 20px rgba(236, 64, 122, 0.6);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
   user-select: none;
 }
 
