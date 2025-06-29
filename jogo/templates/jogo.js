@@ -1,3 +1,4 @@
+
 const palavras = [
   "beijo", "carinho", "abraço", "amor", "namoro", "coração",
   "paixão", "encontro", "saudade", "desejo",
@@ -90,3 +91,16 @@ function voltarInicio() {
   document.getElementById('tela-jogo').classList.add('hidden');
   atualizarRanking();
 }
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDY4GfPbpE0b8fz6ZfUOsitiuu2pUcVqRU",
+  authDomain: "amors-18a20.firebaseapp.com",
+  databaseURL: "https://amors-18a20-default-rtdb.firebaseio.com",
+  projectId: "amors-18a20",
+  storageBucket: "amors-18a20.firebasestorage.app",
+  messagingSenderId: "360392240276",
+  appId: "1:360392240276:web:7910c99a560efc0c4b9881"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const storage = firebase.storage();
