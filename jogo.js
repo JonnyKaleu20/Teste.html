@@ -1,4 +1,3 @@
-
 const palavras = [
   "beijo", "carinho", "abraço", "amor", "namoro", "coração",
   "paixão", "encontro", "saudade", "desejo",
@@ -13,7 +12,6 @@ const palavras = [
 let personagemAtual = "";
 let palavraAtual = "";
 let chances = 10;
-let acertos = 0;
 let letrasUsadas = [];
 let rankings = {
   Mari: 0,
@@ -38,7 +36,9 @@ function iniciarJogo() {
 }
 
 function atualizarPalavra() {
-  const display = palavraAtual.split("").map(letra => letrasUsadas.includes(letra) ? letra : "_").join(" ");
+  const display = palavraAtual.split("").map(letra => 
+    letrasUsadas.includes(letra) ? letra : "_"
+  ).join(" ");
   document.getElementById("palavra").textContent = display;
 
   if (!display.includes("_")) {
@@ -71,6 +71,7 @@ function criarTeclado() {
 }
 
 function tentarLetra(letra) {
+  if(letrasUsadas.includes(letra)) return; // previne duplo clique
   letrasUsadas.push(letra);
   if (palavraAtual.includes(letra)) {
     atualizarPalavra();
@@ -91,4 +92,3 @@ function voltarInicio() {
   document.getElementById('tela-jogo').classList.add('hidden');
   atualizarRanking();
 }
-
