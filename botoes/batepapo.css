@@ -19,6 +19,7 @@ body {
   padding: 20px;
   min-height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 body::before {
@@ -27,6 +28,19 @@ body::before {
   inset: 0;
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(4px);
+  z-index: 0;
+}
+
+body::after {
+  content: "💗 💖 💕 💞";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 30px;
+  animation: floatHearts 10s linear infinite;
+  opacity: 0.4;
+  pointer-events: none;
   z-index: 0;
 }
 
@@ -50,6 +64,8 @@ h1 {
   max-width: 400px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   animation: fadeInUp 1.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
 }
 
 #messages {
@@ -68,6 +84,12 @@ h1 {
   padding: 10px;
   margin-bottom: 10px;
   animation: bounceIn 0.5s ease;
+  box-shadow: 0 2px 8px rgba(255, 182, 193, 0.5);
+  transition: transform 0.3s ease;
+}
+
+#messages li:hover {
+  transform: scale(1.02);
 }
 
 #chatForm {
@@ -82,11 +104,12 @@ input, textarea {
   border: 1px solid #ff69b4;
   font-size: 16px;
   transition: 0.3s ease;
+  background-color: #fff0f5;
 }
 
 input:focus, textarea:focus {
   border-color: #e91e63;
-  box-shadow: 0 0 8px rgba(233, 30, 99, 0.5);
+  box-shadow: 0 0 10px rgba(233, 30, 99, 0.5);
   outline: none;
 }
 
@@ -106,11 +129,12 @@ button {
   cursor: pointer;
   transition: 0.3s ease;
   box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  animation: pulse 2s infinite;
 }
 
 button:hover {
   background: linear-gradient(to right, #ff1493, #e91e63);
-  transform: scale(1.03);
+  transform: scale(1.05);
 }
 
 #backBtn {
@@ -161,6 +185,24 @@ button:hover {
   100% { opacity: 1; }
 }
 
+@keyframes floatHearts {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
 /* Responsividade para mobile */
 @media (max-width: 480px) {
   h1 {
@@ -173,5 +215,9 @@ button:hover {
 
   input, textarea, button {
     font-size: 16px;
+  }
+
+  body::after {
+    font-size: 24px;
   }
 }
