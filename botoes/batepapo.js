@@ -9,7 +9,6 @@ const firebaseConfig = {
 };
 
 
-
 db.on("child_added", (snapshot) => {
   const msg = snapshot.val();
   const li = document.createElement("li");
@@ -44,50 +43,6 @@ form.addEventListener("submit", (e) => {
     dislikes: 0
   };
 
-
-// ✅ Inicializar Firebase (uma vez)
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-
-// ✅ Pedir permissão para notificações (uma vez)
-if ('Notification' in window && Notification.permission !== 'granted') {
-  Notification.requestPermission().then(permission => {
-    console.log("Permissão de notificação:", permission);
-  });
-}
-
-// ✅ Função para mostrar notificação
-function notificarNovaMensagem(texto) {
-  if ('Notification' in window && Notification.permission === 'granted') {
-    new Notification('💌 Nova mensagem!', {
-      body: texto || 'Você recebeu uma nova mensagem!',
-      icon: 'https://static.vecteezy.com/system/resources/previews/000/575/872/original/heart-icon-vector-illustration.jpg'
-    });
-  }
-}
-
-// ✅ Adicionar mensagem no chat + notificação
-function adicionarMensagemNoChat(msg) {
-  const li = document.createElement("li");
-  li.innerHTML = `<strong>${msg.nome}</strong> <small>(${msg.horario})</small><br>${msg.mensagem}`;
-  const mensagens = document.getElementById("messages");
-  mensagens.appendChild(li);
-  mensagens.scrollTop = mensagens.scrollHeight;
-
-  notificarNovaMensagem(msg.mensagem);
-
-  // 🔔 Som
-  const msgSound = document.getElementById("msgSound");
-  if (msgSound) {
-    msgSound.play().catch(() => console.log("Som bloqueado até interação do usuário."));
-  }
-}
-
-// ✅ Monitorar novas mensagens no bate-papo
-db.ref("mensagens").on("child_added", snapshot => {
-  const msg = snapshot.val();
-  adicionarMensagemNoChat(msg);
-});
   db.ref("cartinhas").push(novaCartinha);
   form.reset();
 });

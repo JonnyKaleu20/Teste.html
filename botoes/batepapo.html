@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <title>💬 Bate-Papo em Tempo Real</title>
+  <title>💬 Bate-Papo do Amor</title>
   <link rel="stylesheet" href="batepapo.css">
   <link rel="icon" href="image/heart.png" type="image/x-icon" />
 </head>
@@ -10,13 +10,7 @@
 
   <audio id="msgSound" src="https://cdn.pixabay.com/download/audio/2022/03/01/audio_6d3ccf9c3d.mp3" preload="auto"></audio>
 
-
   <h1>💬 Bate-Papo do Amor</h1>
-
-  <ul id="messages"></ul>
-
-
-
 
   <div id="chatBox">
     <ul id="messages"></ul>
@@ -29,7 +23,7 @@
   </div>
 
   <div id="backBtn">
-    <button onclick="window.location.href='../conteudo.html'">Voltar</button>
+    <button onclick="window.location.href='/conteudo.html'">Voltar</button>
   </div>
 
   <!-- Firebase SDKs -->
@@ -79,6 +73,9 @@
       li.innerHTML = `<strong>${msg.nome}</strong> <small>(${msg.horario})</small><br>${msg.mensagem}`;
       mensagens.appendChild(li);
       mensagens.scrollTop = mensagens.scrollHeight;
+
+      // Toca o som ao receber nova mensagem
+      document.getElementById('msgSound').play();
     });
   </script>
 
