@@ -1,29 +1,29 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <title>Bem-vindo(a)</title>
   <link rel="stylesheet" href="index.css">
-  <link rel="icon" href="image/heart.png" type="image/x-icon" />
 </head>
 <body>
   <div class="container">
     <h1>Bem-vindo(a)</h1>
+ 
     <p>Digite a senha para entrar:</p>
     <input type="password" id="senha" placeholder="Senha">
     <button onclick="verificarSenha()">Entrar</button>
     <p id="mensagemErro" class="erro"></p>
+   
   </div>
 
   <script>
     function verificarSenha() {
       const senha = document.getElementById('senha').value;
-      const mensagemErro = document.getElementById('mensagemErro');
-      
-      if (senha === 'KaleueMari') {
-        window.location.href = '/conteudo.html';
+      if (senha === "KaleueMari") {
+        window.location.href = "conteudo.html";
       } else {
-        mensagemErro.textContent = 'Senha incorreta. Tente novamente.';
+        document.getElementById("mensagemErro").textContent = "Senha incorreta.";
       }
     }
   </script>
