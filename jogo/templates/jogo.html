@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jogo da Forca - Amor</title>
-    <link rel="icon" href="/image/heart.png" type="image/x-icon" />
+
+  <!-- Ícone do site -->
+  <link rel="icon" href="image/heart.png" type="image/x-icon" />
+
+  <!-- Estilo do jogo -->
   <link rel="stylesheet" href="jogo.css" />
 </head>
 <body>
@@ -13,7 +17,9 @@
     <!-- Tela Inicial -->
     <div id="tela-inicial">
       <h1>Jogo da Forca do Amor ❤️</h1>
-        <a href="/conteudo.html" class="botao-voltar">← Voltar para o Amor</a>
+      <!-- Caminho RELATIVO (para GitHub Pages funcionar!) -->
+      <a href="/conteudo.html" class="botao-voltar">← Voltar para o Amor</a>
+
       <div class="personagens">
         <div class="personagem" onclick="selecionarPersonagem('Mari')">
           <img src="Mari.png" alt="Mari" />
@@ -37,17 +43,15 @@
       <p>Chances restantes: <span id="chances">10</span></p>
       <button onclick="voltarInicio()">Voltar ao Início</button>
     </div>
-  
 
+  </div> <!-- Fecha .container -->
 
-  </div>
-  <script src="jogo.js"></script>
-
-   <!-- Firebase + script -->
+  <!-- Firebase SDKs: devem vir ANTES do seu JS que usa Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage-compat.js"></script>
-  <script src="app.js"></script>
-  
+
+  <script src="jogo.js"></script>
+
 </body>
 </html>
