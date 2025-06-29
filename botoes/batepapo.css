@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
 
 * {
@@ -20,6 +19,7 @@ body {
   padding: 20px;
   min-height: 100vh;
   position: relative;
+  overflow-x: hidden;
 }
 
 body::before {
@@ -27,67 +27,93 @@ body::before {
   position: absolute;
   inset: 0;
   background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(5px);
   z-index: 0;
 }
 
 h1 {
   z-index: 1;
-  font-size: 26px;
+  font-size: 30px;
   color: #e91e63;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   text-align: center;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
   animation: fadeInDown 1s ease-in-out;
+  letter-spacing: 1.2px;
 }
 
 #chatBox {
   z-index: 1;
   background: white;
-  border: 2px solid #ff69b4;
-  border-radius: 20px;
-  padding: 20px;
+  border: 3px solid #ff69b4;
+  border-radius: 25px;
+  padding: 25px 30px;
   width: 100%;
-  max-width: 400px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  box-shadow: 0 15px 35px rgba(255, 105, 180, 0.35);
   animation: fadeInUp 1.2s ease-in-out;
+  transition: box-shadow 0.3s ease;
+}
+
+#chatBox:hover {
+  box-shadow: 0 20px 45px rgba(255, 20, 147, 0.6);
 }
 
 #messages {
-  max-height: 300px;
+  max-height: 350px;
   overflow-y: auto;
   list-style: none;
   padding: 0;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   scroll-behavior: smooth;
+  border-radius: 15px;
+  border: 1.5px solid #ffb6c1;
+  background: #fff0f6;
+  box-shadow: inset 0 0 8px #ffb6c1;
+  padding: 15px;
+  font-size: 17px;
 }
 
 #messages li {
   background-color: #ffe6f0;
   border: 1px solid #ffb6c1;
-  border-radius: 12px;
-  padding: 10px;
-  margin-bottom: 10px;
+  border-radius: 15px;
+  padding: 12px 15px;
+  margin-bottom: 12px;
   animation: bounceIn 0.5s ease;
+  box-shadow: 0 2px 6px rgba(255, 105, 180, 0.25);
+  word-wrap: break-word;
+}
+
+#messages li strong {
+  color: #d81b60;
+}
+
+#messages li small {
+  color: #ad1457;
+  font-style: italic;
+  font-size: 13px;
 }
 
 #chatForm {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
 }
 
 input, textarea {
-  padding: 12px 15px;
-  border-radius: 10px;
-  border: 1px solid #ff69b4;
-  font-size: 16px;
-  transition: 0.3s ease;
+  padding: 16px 18px;
+  border-radius: 15px;
+  border: 2px solid #ff69b4;
+  font-size: 18px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  resize: vertical;
+  box-shadow: 0 1px 5px rgba(255, 105, 180, 0.3);
 }
 
 input:focus, textarea:focus {
   border-color: #e91e63;
-  box-shadow: 0 0 8px rgba(233, 30, 99, 0.5);
+  box-shadow: 0 0 12px rgba(233, 30, 99, 0.7);
   outline: none;
 }
 
@@ -97,27 +123,45 @@ input::placeholder, textarea::placeholder {
 }
 
 button {
-  background: linear-gradient(to right, #ff69b4, #ff1493);
+  background: linear-gradient(45deg, #ff69b4, #ff1493);
   color: white;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 700;
   border: none;
-  padding: 12px;
-  border-radius: 10px;
+  padding: 16px;
+  border-radius: 15px;
   cursor: pointer;
-  transition: 0.3s ease;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(255, 20, 147, 0.35);
 }
 
 button:hover {
-  background: linear-gradient(to right, #ff1493, #e91e63);
-  transform: scale(1.03);
+  background: linear-gradient(45deg, #ff1493, #e91e63);
+  transform: scale(1.07);
+  box-shadow: 0 10px 30px rgba(233, 30, 99, 0.55);
 }
 
 #backBtn {
   z-index: 1;
-  margin-top: 20px;
+  margin-top: 25px;
   animation: fadeIn 2s ease;
+}
+
+#backBtn button {
+  font-size: 18px;
+  padding: 14px 26px;
+  border-radius: 15px;
+  background: #ff69b4;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 18px rgba(255, 105, 180, 0.45);
+}
+
+#backBtn button:hover {
+  background: #e91e63;
+  box-shadow: 0 8px 22px rgba(233, 30, 99, 0.65);
 }
 
 /* Animações */
@@ -162,17 +206,41 @@ button:hover {
   100% { opacity: 1; }
 }
 
-/* Responsividade para mobile */
+/* Responsividade para dispositivos móveis */
 @media (max-width: 480px) {
   h1 {
-    font-size: 22px;
+    font-size: 32px;
+    padding: 10px 5px;
   }
 
   #chatBox {
-    padding: 15px;
+    padding: 25px 20px;
+    max-width: 98%;
   }
 
-  input, textarea, button {
-    font-size: 16px;
+  #messages {
+    max-height: 55vh;
+    font-size: 20px;
+    padding: 20px;
+  }
+
+  #messages li {
+    padding: 15px 20px;
+    font-size: 19px;
+  }
+
+  input, textarea {
+    font-size: 20px;
+    padding: 20px;
+  }
+
+  button {
+    font-size: 22px;
+    padding: 20px;
+  }
+
+  #backBtn button {
+    font-size: 18px;
+    padding: 16px 28px;
   }
 }
